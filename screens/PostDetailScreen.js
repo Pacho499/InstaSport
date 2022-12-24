@@ -1,7 +1,10 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
+import Data from '../data/fake-data'
 
-export default function PostDetail() {
+export default function PostDetail(props) {
+  const {postId} = props.route.params
+  const PostData = Data.find(post => post.id === postId)
   return (
     <View style={styles.container}>
       <Text>PostDetail</Text>

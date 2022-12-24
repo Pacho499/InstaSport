@@ -4,7 +4,15 @@ import Data from '../data/fake-data'
 
 export default function Home(props) {
   const posts = Data.map(data => {
-    return <Post key={data.id} imageUri={data.userImage} userName={data.userName} image={data.image} /> 
+    return (
+      <Post 
+      key={data.id} 
+      imageUri={data.userImage} 
+      userName={data.userName} 
+      image={data.image} 
+      onPressImage={() => props.navigation.navigate('PostDetail', {
+        postId: data.id
+      })}/> )
   })
   return (
     <View style={styles.container}>
