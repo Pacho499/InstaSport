@@ -1,14 +1,16 @@
-import { StyleSheet, Text, View, Button } from 'react-native';
+import { StyleSheet, View , ScrollView} from 'react-native';
 import Post from '../components/Post'
 import Data from '../data/fake-data'
 
 export default function Home(props) {
   const posts = Data.map(data => {
-    return <Post imageUri={data.userImage} userName={data.userName} image={data.image} /> 
+    return <Post key={data.id} imageUri={data.userImage} userName={data.userName} image={data.image} /> 
   })
   return (
     <View style={styles.container}>
-      {posts}
+      <ScrollView>
+        {posts}
+      </ScrollView>  
     </View>
   );
 }
@@ -16,7 +18,7 @@ export default function Home(props) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#eae8e8',
     alignItems: 'center'
   },
 });
