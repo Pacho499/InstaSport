@@ -22,8 +22,8 @@ function StackNavigation() {
 function DrawerNavigation () {
     return(
         <NavigationContainer>
-            <Drawer.Navigator>
-                <Drawer.Screen name='StackNavigation' component={StackNavigation}/>
+            <Drawer.Navigator screenOptions={{header: () => null}} initialRouteName='Home'>
+                <Drawer.Screen name='Home' component={StackNavigation}/>
                 <Drawer.Screen name='SavedPost' component={SavedPost}/>
             </Drawer.Navigator>
         </NavigationContainer>  

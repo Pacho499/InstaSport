@@ -1,12 +1,14 @@
-import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Button } from 'react-native';
+import Post from '../components/Post'
+import Data from '../data/fake-data'
 
 export default function Home(props) {
+  const posts = Data.map(data => {
+    return <Post imageUri={data.userImage} userName={data.userName} image={data.image} /> 
+  })
   return (
     <View style={styles.container}>
-      <Text>Home</Text>
-      <Button title={'go to'} onPress={() => props.navigation.navigate('PostDetail')}/>
-      <StatusBar style="auto" />
+      {posts}
     </View>
   );
 }
@@ -15,7 +17,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: 'center'
   },
 });
