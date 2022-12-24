@@ -9,4 +9,5 @@ class Post {
         this.userImage = userImage
     }  
 } 
-    
+   
+export default Post
