@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
-import {SCREEN_HEIGHT, SCREEN_WIDTH} from '../utils/helper'
+import { SCREEN_WIDTH} from '../utils/helper'
 import Data from '../data/fake-data'
 
 
@@ -8,13 +8,13 @@ export default function PostDetail(props) {
   const postData = Data.find(post => post.id === postId)
   return (
     <View style={styles.container}>
-      <TouchableOpacity onPress={() => {props.navigation.navigate('Profile', {
+      <TouchableOpacity style={styles.userNameContainer} onPress={() => {props.navigation.navigate('Profile', {
         postData
       }) }}>
         <Text style={styles.userName}>By {postData.userName}</Text>
       </TouchableOpacity>
       <Image source={{uri: postData.image}} style={styles.image} /> 
-      <Text>{postData.description}</Text>
+      <Text style={styles.description}>{postData.description}</Text>
     </View>
   );
 }
@@ -30,7 +30,19 @@ const styles = StyleSheet.create({
     height: 400
   },
   userName:{
-    textDecorationLine: 'underline'
-
+    textDecorationLine: 'underline',
+    fontSize: 22
+  },
+  userNameContainer:{
+    marginTop: 20,
+    marginBottom: 20,
+    width: SCREEN_WIDTH - 20 
+  },
+  description:{
+    width: SCREEN_WIDTH - 20, 
+    borderWidth: 1, 
+    padding: 10,
+    color: '#555', 
+    fontSize: 20, 
   }
 });

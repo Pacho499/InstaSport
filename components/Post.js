@@ -1,9 +1,23 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {View, Text, Image, StyleSheet, TouchableOpacity} from 'react-native'
 import {SCREEN_HEIGHT, SCREEN_WIDTH} from '../utils/helper'
 import Ionicons from '@expo/vector-icons/Ionicons';
 
 const Post = props => {
+    const [like, setLike] = useState(false)
+
+    let lastTap = null
+    const onPressLike = () => {
+        const now = Date.now()
+        const time_delay = 400
+        if (lastTap && (now - lastTap) < time_delay){
+            setLike(!like)
+        }else{
+            lastTap = now
+        }
+    }
+    const hearthColor = like ? 'red' : 'black'
+    const icons = like ? 'md-heart' : 'md-heart-outline'
     return (
         <View style={styles.container}>
             <View style={{flexDirection:'row', padding:10, alignItems: 'center'}} >
@@ -14,7 +28,10 @@ const Post = props => {
                <Image source={{uri:props.image}} style={styles.postImage}/> 
             </TouchableOpacity>
             <View style={{ flexDirection:'row', alignItems:'center', justifyContent:'space-between'}}>
-                <Ionicons style={{ marginLeft: 10, marginTop: 10}} name='md-heart-outline' size={28} color="black" />
+                <TouchableOpacity onPress={onPressLike}>
+                   <Ionicons style={{ marginLeft: 10, marginTop: 10}} name={icons} size={28} color={hearthColor} /> 
+                </TouchableOpacity>
+                
                 <Ionicons style={{ marginRight: 10, marginTop: 10}} name='md-bookmark' size={28} color='black'/>
             </View>
         </View>
