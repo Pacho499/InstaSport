@@ -1,11 +1,18 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View, Image } from 'react-native';
+import {SCREEN_HEIGHT, SCREEN_WIDTH} from '../utils/helper'
+import Data from '../data/fake-data'
 
-export default function Profile() {
+export default function Profile(props) {
+  const {userId} = props.route.params
+  const userPosts = Data.filter(post => post.userId === userId)
+  const postsImages = userPosts.map(post => {
+    return (
+      <Image source={{uri: post.image}} style={styles.image} />
+    )
+  })
   return (
     <View style={styles.container}>
-      <Text>Profile</Text>
-      <StatusBar style="auto" />
+      {postsImages}
     </View>
   );
 }
@@ -16,5 +23,11 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+    flexDirection: 'row',
+    flexWrap: 'wrap'
   },
+  image: {
+    width: SCREEN_WIDTH / 3,
+    height: SCREEN_HEIGHT / 3
+  }
 });
