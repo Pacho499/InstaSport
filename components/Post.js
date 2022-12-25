@@ -5,6 +5,7 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 
 const Post = props => {
     const [like, setLike] = useState(false)
+    const [save, setSave] = useState(false)
 
     let lastTap = null
     const onPressLike = () => {
@@ -16,8 +17,14 @@ const Post = props => {
             lastTap = now
         }
     }
-    const hearthColor = like ? 'red' : 'black'
-    const icons = like ? 'md-heart' : 'md-heart-outline'
+
+    const onPressSave = () => {
+        setSave(!save)
+    }
+    const heartColor = like ? 'red' : 'black'
+    const saveColor = save ? 'green' : 'black'
+    const heartIcons = like ? 'md-heart' : 'md-heart-outline'
+    const saveIcons = save ? 'bookmark' : 'bookmark-outline'
     return (
         <View style={styles.container}>
             <View style={{flexDirection:'row', padding:10, alignItems: 'center'}} >
@@ -29,10 +36,12 @@ const Post = props => {
             </TouchableOpacity>
             <View style={{ flexDirection:'row', alignItems:'center', justifyContent:'space-between'}}>
                 <TouchableOpacity onPress={onPressLike}>
-                   <Ionicons style={{ marginLeft: 10, marginTop: 10}} name={icons} size={28} color={hearthColor} /> 
+                   <Ionicons style={{ marginLeft: 10, marginTop: 10}} name={heartIcons} size={28} color={heartColor} /> 
+                </TouchableOpacity>
+                <TouchableOpacity onPress={onPressSave}>
+                    <Ionicons style={{ marginRight: 10, marginTop: 10}} name={saveIcons} size={28} color={saveColor} />
                 </TouchableOpacity>
                 
-                <Ionicons style={{ marginRight: 10, marginTop: 10}} name='md-bookmark' size={28} color='black'/>
             </View>
         </View>
     )
