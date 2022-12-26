@@ -1,11 +1,10 @@
-import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
+import SavedPost from '../components/SavedPost'
 
-export default function SavedPost() {
+export default function SavedPostScreen() {
   return (
     <View style={styles.container}>
-      <Text>SavedPost</Text>
-      <StatusBar style="auto" />
+      <SavedPost/>
     </View>
   );
 }
