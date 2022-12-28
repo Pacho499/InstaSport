@@ -1,9 +1,10 @@
 import { StyleSheet, View , ScrollView} from 'react-native';
 import Post from '../components/Post'
-import Data from '../data/fake-data'
+import {useSelector} from 'react-redux'
 
 export default function Home(props) {
-  const posts = Data.map(data => {
+  const allPosts = useSelector(state => state.posts.posts)
+  const posts = allPosts.map(data => {
     return (
       <Post 
       key={data.id} 
