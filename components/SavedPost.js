@@ -4,11 +4,10 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 
 export default function SavedPost(props) {
     const saveIcons = props.save ? 'bookmark' : 'bookmark-outline'
-    const imageUri = 'https://images.unsplash.com/photo-1579952363873-27f3bade9f55?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=975&q=80'
   return (
     <View style={styles.container}>
-      <Image source={{uri: imageUri}} style={styles.postImage}/>
-      <Text style={styles.userName}>Billy</Text>
+      <Image source={{uri: props.image}} style={styles.postImage}/>
+      <Text style={styles.userName}>{props.userName}</Text>
       <TouchableOpacity>
             <Ionicons style={styles.saveImage} name={saveIcons} size={28} color='black' />
         </TouchableOpacity>
@@ -24,7 +23,8 @@ const styles = StyleSheet.create({
     borderRadius: 6,
     flexDirection: 'row',
     justifyContent:'space-around',
-    alignItems:'center'
+    alignItems:'center',
+    marginTop: 20,
   },
   postImage:{
     height: 100,

@@ -1,9 +1,16 @@
+import {SAVE_POST} from '../action/savePost'
 const initialState = {
     savedItems: []
 }
 
 const savedPost = (state = initialState, action) => {
     switch(action.type){
+        case SAVE_POST: 
+            const savedPost = action.post
+            return{
+                ...state,
+                savedItems:[...state.savedItems, savedPost]
+            }
         default : 
             return state
     }
