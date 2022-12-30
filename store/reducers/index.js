@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux'
 import savedPost from './savedPost'
-import posts from './Posts'
+import posts from './posts'
 
 const rootReducer = combineReducers({
     savedPost, posts
