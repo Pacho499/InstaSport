@@ -1,6 +1,6 @@
 import {SAVE_POST} from '../action/savePost'
 const initialState = {
-    savedItems: []
+    savedItems: {}
 }
 
 const savedPost = (state = initialState, action) => {
@@ -9,7 +9,7 @@ const savedPost = (state = initialState, action) => {
             const savedPost = action.post
             return{
                 ...state,
-                savedItems:[...state.savedItems, savedPost]
+                savedItems:{...state.savedItems, [savedPost.id]: savedPost}
             }
         default : 
             return state

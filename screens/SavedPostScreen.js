@@ -3,9 +3,15 @@ import SavedPost from '../components/SavedPost'
 import {useSelector} from 'react-redux'
 
 export default function SavedPostScreen() {
-  const savedPostList = useSelector(state => state.savedPost.savedItems)
+  const savedPostList = useSelector(state => {
+    const postArray = [];
+    for (id in state.savedPost.savedItems){
+      postArray.push(state.savedPost.savedItems[id])
+    }
+    return postArray
+  })
   const myPost = savedPostList.map(post => {
-    return <SavedPost userName={post.userName} image={post.postImage} />
+    return <SavedPost key={post.id} userName={post.userName} image={post.postImage} />
   })
   return (
     <View style={styles.container}>
