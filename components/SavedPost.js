@@ -3,14 +3,13 @@ import {SCREEN_WIDTH} from '../utils/helper'
 import Ionicons from '@expo/vector-icons/Ionicons';
 
 export default function SavedPost(props) {
-    const saveIcons = props.save ? 'bookmark' : 'bookmark-outline'
   return (
     <View style={styles.container}>
       <Image source={{uri: props.image}} style={styles.postImage}/>
       <Text style={styles.userName}>{props.userName}</Text>
-      <TouchableOpacity>
-            <Ionicons style={styles.saveImage} name={saveIcons} size={28} color='black' />
-        </TouchableOpacity>
+      <TouchableOpacity onPress={props.onRemovePost}>
+            <Ionicons style={styles.saveImage} name='trash' size={32} color='black' />
+      </TouchableOpacity>
     </View>
   );
 }

@@ -2,12 +2,18 @@ import React, {useState} from 'react';
 import {View, Text, Image, StyleSheet, TouchableOpacity} from 'react-native'
 import {SCREEN_HEIGHT, SCREEN_WIDTH} from '../utils/helper'
 import Ionicons from '@expo/vector-icons/Ionicons';
-import { useDispatch } from 'react-redux';
+import {useDispatch,useSelector} from 'react-redux';
 import {savePost} from '../store/action/savePost'
+import {removePost} from '../store/action/removePost'
 const Post = props => {
     const [like, setLike] = useState(false)
     const [save, setSave] = useState(false)
     const dispatch = useDispatch();
+    const savedPost = useSelector(state => state.savedPost.savedItems);
+    let isSaved = null 
+    if (savedPost[props.id]){
+        isSaved = savedPost[props.id].saved
+    }
 
     let lastTap = null
     const onPressLike = () => {
@@ -21,18 +27,19 @@ const Post = props => {
     }
 
     const onPressSave = () => {
-        setSave(!save)
         const postToSave = {
             userName: props.userName,
             postImage: props.image,
-            id: props.id
+            id: props.id,
+            saved:true
         }
-        dispatch(savePost(postToSave))
+        save ? dispatch(removePost(props.id)) : dispatch(savePost(postToSave)) 
+        setSave(!save)
     }
     const heartColor = like ? 'red' : 'black'
-    const saveColor = save ? 'green' : 'black'
+    const saveColor = isSaved ? 'green' : 'black'
     const heartIcons = like ? 'md-heart' : 'md-heart-outline'
-    const saveIcons = save ? 'bookmark' : 'bookmark-outline'
+    const saveIcons = isSaved ? 'bookmark' : 'bookmark-outline'
     return (
         <View style={styles.container}>
             <View style={{flexDirection:'row', padding:10, alignItems: 'center'}} >
