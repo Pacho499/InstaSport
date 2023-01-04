@@ -6,15 +6,24 @@ import Home from './screens/HomeScreen'
 import PostDetail from './screens/PostDetailScreen'
 import Profile from './screens/ProfileScreen'
 import SavedPost from './screens/SavedPostScreen'
+import HeaderButton from './components/HeaderButton';
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator()
 
-function StackNavigation() {
+function HomeStackNavigation() {
   return (
     <Stack.Navigator>
-        <Stack.Screen name="HomePost" component={Home} />
+        <Stack.Screen options={({navigation}) => ({headerLeft: () => <HeaderButton onPressLeft = {() => navigation.toggleDrawer()}/>})} name="Home" component={Home} />
         <Stack.Screen options={({route}) => ({title: route.params.title})} name="PostDetail" component={PostDetail} />
         <Stack.Screen name="Profile" component={Profile} />
+      </Stack.Navigator>
+  );
+}
+
+function SavedStackNavigation() {
+  return (
+    <Stack.Navigator>
+        <Stack.Screen options={({navigation}) => ({headerLeft: () => <HeaderButton onPressLeft = {() => navigation.toggleDrawer()}/>}, {title: 'Saved Post'})} name="SavedPost" component={SavedPost} />
       </Stack.Navigator>
   );
 }
@@ -23,8 +32,8 @@ function DrawerNavigation () {
     return(
         <NavigationContainer>
             <Drawer.Navigator screenOptions={{header: () => null}} initialRouteName='Home'>
-                <Drawer.Screen name='Home' component={StackNavigation}/>
-                <Drawer.Screen name='SavedPost' component={SavedPost}/>
+                <Drawer.Screen options={{title: 'Home'}} name='HomeDrawer' component={HomeStackNavigation}/>
+                <Drawer.Screen options={{title: 'Saved Post'}} name='SavedPostDrawer' component={SavedStackNavigation}/>
             </Drawer.Navigator>
         </NavigationContainer>  
     )
