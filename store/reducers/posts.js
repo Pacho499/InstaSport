@@ -1,10 +1,10 @@
 import DATA from '../../data/fake-data';
 
 const initialState = {
-    posts: DATA
-}
+  posts: DATA,
+};
 const posts = (state = initialState, action) => {
-    return state
-}
+  return state;
+};
 
 export default posts;

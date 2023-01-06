@@ -9,7 +9,7 @@ const POST = [
     'Scarpa nike blu con pallone da calcio professionale',
     'u1',
     'Billy',
-    'https://images.unsplash.com/photo-1552072805-2a9039d00e57?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=934&q=80'
+    'https://images.unsplash.com/photo-1552072805-2a9039d00e57?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=934&q=80',
   ),
   new Post(
     '2',
