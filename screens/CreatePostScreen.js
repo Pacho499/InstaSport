@@ -1,16 +1,30 @@
 import React, {useState} from 'react';
-import {StyleSheet, View, Text, TextInput, Button} from 'react-native';
+import {StyleSheet, View, Text, TextInput, Button, KeyboardAvoidingView, ScrollView} from 'react-native';
+import {isIos} from  '../utils/helper'
+import axios from 'axios';
 
 export default function CreatePost() {
   const [title, setTitle] = useState('');
-  const [image, setImage] = useState('')
-  const [description, setDescription] = useState('')
+  const [image, setImage] = useState('');
+  const [description, setDescription] = useState('');
 
-  const onSubmitData = () => {
-
-  }
+  const onSubmitData = async () => {
+    const url = 'https://instasport-d9397-default-rtdb.firebaseio.com/posts.json';
+    const data = await axios.post(url, {
+      title,
+      image,
+      description,
+      id: 10,
+      userId : 'u1',
+      userName: 'Billy'
+    });
+    setTitle(''),
+    setImage(''),
+    setDescription('')
+  };
   return (
-    <View style={styles.container}>
+    <KeyboardAvoidingView keyboardVerticalOffset={100} style={{flex:1}}>
+      <ScrollView contentContainerStyle={styles.container}>
       <Text style={styles.title}>Titolo del post</Text>
       <TextInput
         style={styles.input}
@@ -28,31 +42,32 @@ export default function CreatePost() {
       <Text style={styles.title}>Descrizione del post</Text>
       <TextInput
         style={styles.input}
-        placeholder="Scrivi la descrizione"
+        placeholder='Scrivi la descrizione'
         value={description}
         onChangeText={(value) => setDescription(value)}
       />
-      <Button title='invia' style={{marginTop:20}} onPress={onSubmitData} />
-    </View>
+      <Button title='invia' style={{marginTop: 20}} onPress={onSubmitData} />
+    </ScrollView>
+    </KeyboardAvoidingView>
+    
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     backgroundColor: '#eae8e8',
     alignItems: 'center',
   },
-  title:{
+  title: {
     fontSize: 20,
     fontWeight: '500',
-    marginTop : 10 
+    marginTop: 10,
   },
   input: {
     borderBottomWidth: 1,
     width: '90%',
     marginVertical: 10,
-    paddingLeft : 5,
-    paddingBottom : 5
-  }
+    paddingLeft: 5,
+    paddingBottom: 5,
+  },
 });
