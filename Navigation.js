@@ -17,8 +17,11 @@ function HomeStackNavigation() {
       <Stack.Screen
         options={({navigation}) => ({
           headerLeft: () => (
-            <HeaderButton onPressLeft={() => navigation.toggleDrawer()} />
+            <HeaderButton left={true} onPressLeft={() => navigation.toggleDrawer()} />
           ),
+          headerRight: () => (
+            <HeaderButton onPressRight={() => navigation.navigate('CreatePost')} />
+          )
         })}
         name='Home'
         component={Home}
@@ -29,6 +32,7 @@ function HomeStackNavigation() {
         component={PostDetail}
       />
       <Stack.Screen name='Profile' component={Profile} />
+      <Stack.Screen name='CreatePost' component={CreatePost} />
     </Stack.Navigator>
   );
 }
