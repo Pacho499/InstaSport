@@ -41,14 +41,12 @@ function SavedStackNavigation() {
   return (
     <Stack.Navigator>
       <Stack.Screen
-        options={({navigation}) => (
-          {
-            headerLeft: () => (
-              <HeaderButton onPressLeft={() => navigation.toggleDrawer()} />
-            ),
-          },
-          {title: 'Saved Post'}
-        )}
+        options={({navigation}) => ({
+          headerLeft: () => (
+            <HeaderButton left={true} onPressLeft={() => navigation.toggleDrawer()} />
+          ),
+          title : 'Saved Post'
+        })}
         name='SavedPost'
         component={SavedPost}
       />
