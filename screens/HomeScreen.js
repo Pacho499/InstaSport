@@ -1,8 +1,14 @@
+import React, {useEffect} from 'react';
 import {StyleSheet, View, ScrollView} from 'react-native';
 import Post from '../components/Post';
-import {useSelector} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
+import {fetchPost} from '../store/action/fetchPost';
 
 export default function Home(props) {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(fetchPost());
+  });
   const allPosts = useSelector((state) => state.posts.posts);
   const posts = allPosts.map((data) => {
     return (

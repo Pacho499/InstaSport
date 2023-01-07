@@ -23,7 +23,7 @@ export default function CreatePost() {
     setDescription('')
   };
   return (
-    <KeyboardAvoidingView keyboardVerticalOffset={100} style={{flex:1}}>
+    <KeyboardAvoidingView behavior={isIos ? 'padding' : null} keyboardVerticalOffset={100} style={{flex:1}}>
       <ScrollView contentContainerStyle={styles.container}>
       <Text style={styles.title}>Titolo del post</Text>
       <TextInput
