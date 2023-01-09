@@ -8,6 +8,8 @@ import Profile from './screens/ProfileScreen';
 import SavedPost from './screens/SavedPostScreen';
 import HeaderButton from './components/HeaderButton';
 import CreatePost from './screens/CreatePostScreen';
+import SignIn from './screens/SignInScreen';
+import SignUp from './screens/SignUpScreen';
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
 
@@ -17,11 +19,16 @@ function HomeStackNavigation() {
       <Stack.Screen
         options={({navigation}) => ({
           headerLeft: () => (
-            <HeaderButton left={true} onPressLeft={() => navigation.toggleDrawer()} />
+            <HeaderButton
+              left={true}
+              onPressLeft={() => navigation.toggleDrawer()}
+            />
           ),
           headerRight: () => (
-            <HeaderButton onPressRight={() => navigation.navigate('CreatePost')} />
-          )
+            <HeaderButton
+              onPressRight={() => navigation.navigate('CreatePost')}
+            />
+          ),
         })}
         name='Home'
         component={Home}
@@ -43,9 +50,12 @@ function SavedStackNavigation() {
       <Stack.Screen
         options={({navigation}) => ({
           headerLeft: () => (
-            <HeaderButton left={true} onPressLeft={() => navigation.toggleDrawer()} />
+            <HeaderButton
+              left={true}
+              onPressLeft={() => navigation.toggleDrawer()}
+            />
           ),
-          title : 'Saved Post'
+          title: 'Saved Post',
         })}
         name='SavedPost'
         component={SavedPost}
@@ -56,24 +66,47 @@ function SavedStackNavigation() {
 
 function DrawerNavigation() {
   return (
-    <NavigationContainer>
-      <Drawer.Navigator
-        screenOptions={{header: () => null}}
-        initialRouteName='Home'
-      >
-        <Drawer.Screen
-          options={{title: 'Home'}}
-          name='HomeDrawer'
-          component={HomeStackNavigation}
-        />
-        <Drawer.Screen
-          options={{title: 'Saved Post'}}
-          name='SavedPostDrawer'
-          component={SavedStackNavigation}
-        />
-      </Drawer.Navigator>
-    </NavigationContainer>
+    <Drawer.Navigator
+      screenOptions={{header: () => null}}
+      initialRouteName='Home'
+    >
+      <Drawer.Screen
+        options={{title: 'Home'}}
+        name='HomeDrawer'
+        component={HomeStackNavigation}
+      />
+      <Drawer.Screen
+        options={{title: 'Saved Post'}}
+        name='SavedPostDrawer'
+        component={SavedStackNavigation}
+      />
+    </Drawer.Navigator>
   );
 }
 
-export default DrawerNavigation;
+function AuthNavigation() {
+  return (
+    <Stack.Navigator initialRouteName='signIn'>
+      <Stack.Screen
+        options={{title: 'Sign in'}}
+        name='signIn'
+        component={SignIn}
+      />
+      <Stack.Screen
+        options={{title: 'Sign Up'}}
+        name='signUp'
+        component={SignUp}
+      />
+    </Stack.Navigator>
+  );
+}
+
+function mainNavigation() {
+  const userToken = null;
+  return (
+    <NavigationContainer>
+      {userToken ? <DrawerNavigation /> : <AuthNavigation />}
+    </NavigationContainer>
+  );
+}
+export default mainNavigation;
