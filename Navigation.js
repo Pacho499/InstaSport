@@ -10,6 +10,8 @@ import HeaderButton from './components/HeaderButton';
 import CreatePost from './screens/CreatePostScreen';
 import SignIn from './screens/SignInScreen';
 import SignUp from './screens/SignUpScreen';
+import {useSelector} from 'react-redux';
+
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
 
@@ -102,7 +104,7 @@ function AuthNavigation() {
 }
 
 function mainNavigation() {
-  const userToken = null;
+  const userToken = useSelector(state => state.authUser.token)
   return (
     <NavigationContainer>
       {userToken ? <DrawerNavigation /> : <AuthNavigation />}

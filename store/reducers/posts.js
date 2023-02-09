@@ -6,7 +6,6 @@ const initialState = {
 const posts = (state = initialState, action) => {
   switch(action.type){
     case FETCH_POST:
-      console.log(action)
       return{
         ...state,
         posts: action.posts

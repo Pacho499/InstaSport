@@ -6,7 +6,6 @@ export const fetchPost = () => {
     return async dispatch => {
         //operazioni asincrone
         const data = await axios.get('https://instasport-d9397-default-rtdb.firebaseio.com/posts.json')
-        console.log('dati da firebase', data)
         const myPosts = data.data
         const loadedPost = [];
         for (let key in myPosts){
@@ -23,7 +22,6 @@ export const fetchPost = () => {
             )
             
         }
-        console.log(loadedPost)
         dispatch({type:FETCH_POST, posts: loadedPost})
     }
 }
