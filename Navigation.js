@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {createDrawerNavigator} from '@react-navigation/drawer';
+import {createDrawerNavigator, DrawerContentScrollView, DrawerItem} from '@react-navigation/drawer';
 import Home from './screens/HomeScreen';
 import PostDetail from './screens/PostDetailScreen';
 import Profile from './screens/ProfileScreen';
@@ -10,7 +10,9 @@ import HeaderButton from './components/HeaderButton';
 import CreatePost from './screens/CreatePostScreen';
 import SignIn from './screens/SignInScreen';
 import SignUp from './screens/SignUpScreen';
-import {useSelector} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
+import {retrieveData, logout} from './store/action/authUser'
+import LoadingAuth from './screens/LoadingAuth';
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -66,9 +68,20 @@ function SavedStackNavigation() {
   );
 }
 
+function CustomDrawer(props) {
+  const dispatch = useDispatch()
+  return(
+    <DrawerContentScrollView>
+      <DrawerItem label='Home' onPress={() => props.navigation.navigate('Home')}/>
+      <DrawerItem label='Saved Post' onPress={() => props.navigation.navigate('SavedPostDrawer')}/>
+      <DrawerItem inactiveTintColor='red' label='Logout' onPress={() => {dispatch(logout())}}/>
+    </DrawerContentScrollView>
+  )
+}
 function DrawerNavigation() {
   return (
     <Drawer.Navigator
+      drawerContent={props => <CustomDrawer navigation={props.navigation}/>}
       screenOptions={{header: () => null}}
       initialRouteName='Home'
     >
@@ -104,10 +117,19 @@ function AuthNavigation() {
 }
 
 function mainNavigation() {
+  const [isLoading, setIsLoading] = React.useState(false)
+  const dispatch = useDispatch();
+  React.useEffect(() => {
+    setIsLoading(true)
+    //possiamo usare sia async await che then
+    dispatch(retrieveData()).then(()=> {
+      setIsLoading(false)
+    })
+  }, [dispatch])
   const userToken = useSelector(state => state.authUser.token)
   return (
     <NavigationContainer>
-      {userToken ? <DrawerNavigation /> : <AuthNavigation />}
+      {isLoading ? <LoadingAuth/> : userToken ? <DrawerNavigation /> : <AuthNavigation />}
     </NavigationContainer>
   );
 }
