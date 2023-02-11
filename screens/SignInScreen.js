@@ -14,7 +14,7 @@ const SignIn = ({navigation}) => {
       <Text style={styles.title}>Email</Text>
       <TextInput keyboardType='email-address' value={email} onChangeText={value => setEmail(value)} style={styles.input} placeholder='Email'/>
       <Text style={styles.title}>Password</Text>
-      <TextInput secureTextEntry='true' value={password} onChangeText={value => setPassword(value)} style={styles.input} placeholder='Password'/>
+      <TextInput secureTextEntry={true} value={password} onChangeText={value => setPassword(value)} style={styles.input} placeholder='Password'/>
       <Button title='Signin' onPress={onPressSignIn}/>
       <Button title='Go to signup' onPress={() => navigation.navigate('signUp')}/>
     </View>

@@ -21,7 +21,7 @@ const SignUp = ({navigation}) => {
       />
       <Text style={styles.title}>Password</Text>
       <TextInput
-        secureTextEntry='true'
+        secureTextEntry={true}
         value={password}
         onChangeText={(value) => setPassword(value)}
         style={styles.input}
